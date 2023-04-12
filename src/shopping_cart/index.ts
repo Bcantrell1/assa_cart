@@ -66,7 +66,6 @@ export const ShoppingCart = (modalElement: any) => {
         default:
           break;
       }
-
       removeEventListeners(modalElement, modalData);
       addEventListeners(modalElement, modalData);
     }

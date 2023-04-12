@@ -30,14 +30,13 @@ export const handler = {
   },
 
   handleQuantityAdjustButtonClick: (element: any) => {
-    const button = element.target;
-    if (button.className.includes('minus')) {
-      if(parseInt(button.dataset.qty!) === 1) {
-        Cart.removeItem(parseInt(button.dataset.id!));
+    if (element.className.includes('minus')) {
+      if(parseInt(element.dataset.qty!) === 1) {
+        Cart.removeItem(parseInt(element.dataset.id!));
       }
-      Cart.updateItem(parseInt(button.dataset.id!), parseInt(button.dataset.qty) - 1);
+      Cart.updateItem(parseInt(element.dataset.id!), parseInt(element.dataset.qty) - 1);
     } else {
-      Cart.updateItem(parseInt(button.dataset.id!), parseInt(button.dataset.qty) + 1);
+      Cart.updateItem(parseInt(element.dataset.id!), parseInt(element.dataset.qty) + 1);
     }
     shoppingCart.render();
   },
@@ -47,26 +46,25 @@ export const handler = {
     shoppingCart.render();
   },
   
-  handleSortNameButtonClick: (render: any) => {
+  handleSortNameButtonClick: () => {
     Cart.sortName();
-    render();
+    shoppingCart.render();
   },
 
-  handleSortQuantityButtonClick: (render: any) => {
+  handleSortQuantityButtonClick: () => {
     Cart.sortQty();
-    render();
+    shoppingCart.render();
   },
 
-  handleAddToCartButtonClick: (render: any) => {
+  handleAddToCartButtonClick: () => {
     const name = prompt('Enter the name of the item');
     if (!name) return;
     if (Cart.items.find(item => item.name === name)) {
       Cart.updateItem(Cart.items.find(item => item.name === name)!.id, Cart.items.find(item => item.name === name)!.qty + 1);
-      render();
+      shoppingCart.render();
       return;
     }
-    // instead of using the id from the prompt, we'll use the length of the items array
     Cart.addItem({id: Cart.items.length, name: name, qty: 1});
-    render();
+    shoppingCart.render();
   },
 };
