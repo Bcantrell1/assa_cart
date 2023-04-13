@@ -22,5 +22,6 @@ export const shoppingCart = ShoppingCart(modalElement);
 document.querySelector('#start_shopping')!.addEventListener("click", () => {
   modalContent.style.display = "flex";
   startModal.style.display = "none";
+
   shoppingCart.init();
 });

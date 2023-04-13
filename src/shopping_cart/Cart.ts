@@ -5,7 +5,7 @@ import plusBlack from './../assets/plus_black.svg';
 export const Cart = {
   key: 'assa_cart',
   items: [] as CartItem[],
-  init() {
+  init(): void {
     try {
       let _items = localStorage.getItem(Cart.key);
       if (_items) {
@@ -24,7 +24,7 @@ export const Cart = {
       console.error('Error initializing cart:', error);
     }
   },
-  sync() {
+  sync(): void {
     try {
       let _cart = JSON.stringify(Cart.items);
       localStorage.setItem(Cart.key, _cart);
@@ -32,27 +32,27 @@ export const Cart = {
       console.error('Error syncing cart:', error);
     }
   },
-  addItem(item: CartItem) {
+  addItem(item: CartItem): void {
     Cart.items.push(item);
     Cart.sync();
   },
-  removeItem(id: number) {
+  removeItem(id: number): void {
     Cart.items = Cart.items.filter(item => item.id !== id);
     Cart.sync();
   },
-  updateItem(id: number, qty: number) {
+  updateItem(id: number, qty: number): void {
     let item = Cart.items.find(item => item.id === id);
     if (item) {
       item.qty = qty;
       Cart.sync();
     }
   },
-  clear() {
+  clear(): void {
     Cart.items = [];
     Cart.sync();
   },
-  sortName() {
-    const isAscending = Cart.items.every((item, index, array) => {
+  sortName(): void {
+    const isAscending: Boolean = Cart.items.every((item, index, array) => {
       if (index === 0) {
         return true;
       }
@@ -65,8 +65,8 @@ export const Cart = {
     }
     Cart.sync();
   },
-  sortQty() {
-    const isAscending = Cart.items.every((item, index, array) => {
+  sortQty(): void {
+    const isAscending: Boolean = Cart.items.every((item, index, array) => {
       if (index === 0) {
         return true;
       }
@@ -79,7 +79,7 @@ export const Cart = {
     }
     Cart.sync();
   },
-  showCart() {
+  showCart(): void {
     const cartSelection = document.querySelector('#cart') as HTMLDivElement;
     cartSelection.textContent = '';
 

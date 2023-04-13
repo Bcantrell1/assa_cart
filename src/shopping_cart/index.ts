@@ -11,7 +11,7 @@ interface ShoppingCart {
 export const ShoppingCart = (modalElement: HTMLElement): ShoppingCart => {
   const modalData: ModalData = { step: 0, checked: false };
 
-  const render = () => {
+  const render = (): void => {
     const modalContent: HTMLDivElement | null = modalElement.querySelector<HTMLDivElement>('#modal_content')!;
     if (modalContent) {
       switch (modalData.step) {

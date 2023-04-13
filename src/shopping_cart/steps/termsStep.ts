@@ -3,10 +3,9 @@ import whiteLogo from "./../../assets/logo_white.svg";
 import closeIcon from "./../../assets/arrow.svg";
 import TERMS from "./../../assets/terms.json";
 
-// Cumbersome way to render the modal but avoids the use of a templating engine and xss - full vanilla
 export const renderTermsModal = (modalData: ModalData) => {
   const modalContent = document.querySelector('#modal_content')!;
-  modalContent.innerHTML = '';
+  modalContent.textContent = '';
   const fragment: DocumentFragment = new DocumentFragment();
 
   const modalHeader: HTMLDivElement = document.createElement('div');
@@ -64,9 +63,7 @@ export const renderTermsModal = (modalData: ModalData) => {
   }
 
   buttonDiv.append(nextButton);
-
   modalBody.append(hgroup, modalAccept, buttonDiv);
-
   fragment.append(modalHeader, modalBody);
 
   modalContent.innerHTML = '';

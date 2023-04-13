@@ -5,55 +5,55 @@ import pinkPlusIcon from "./../../assets/plus_pink.svg";
 import { Cart } from "../Cart";
 
 export const renderCartModal = (modalContent: HTMLDivElement) => {
-  modalContent.innerHTML = '';
+  modalContent.textContent = '';
   Cart.init();
 
-  const fragment = document.createDocumentFragment();
+  const fragment: DocumentFragment = document.createDocumentFragment();
 
-  const header = document.createElement('div');
+  const header: HTMLDivElement = document.createElement('div');
   header.classList.add('modal-header');
 
-  const logoImg = document.createElement('img');
+  const logoImg: HTMLImageElement = document.createElement('img');
   logoImg.src = whiteLogo;
   logoImg.alt = 'White Logo';
 
-  const title = document.createElement('div');
+  const title: HTMLDivElement = document.createElement('div');
   title.classList.add('title');
 
-  const modalBack = document.createElement('img');
+  const modalBack: HTMLImageElement = document.createElement('img');
   modalBack.classList.add('modal-back');
   modalBack.src = closeIcon;
   modalBack.alt = 'Close Icon';
 
-  const h1 = document.createElement('h1');
+  const h1: HTMLHeadingElement = document.createElement('h1');
   h1.textContent = 'Shopping Cart';
 
   title.append(modalBack, h1);
   header.append(logoImg, title);
 
-  const body = document.createElement('div');
+  const body: HTMLDivElement = document.createElement('div');
   body.classList.add('modal-body');
 
-  const cartHeader = document.createElement('div');
+  const cartHeader: HTMLDivElement = document.createElement('div');
   cartHeader.classList.add('cart-header');
 
-  const nameSortButton = document.createElement('button');
+  const nameSortButton: HTMLButtonElement = document.createElement('button');
   nameSortButton.id = 'name_sort';
   nameSortButton.classList.add('cart-header-item');
   nameSortButton.textContent = 'ITEM NAME';
 
-  const nameSortIcon = document.createElement('img');
+  const nameSortIcon: HTMLImageElement = document.createElement('img');
   nameSortIcon.src = sortIcon;
   nameSortIcon.alt = '';
 
   nameSortButton.append(nameSortIcon);
 
-  const qtySortButton = document.createElement('button');
+  const qtySortButton: HTMLButtonElement = document.createElement('button');
   qtySortButton.id = 'qty_sort';
   qtySortButton.classList.add('cart-header-item');
   qtySortButton.textContent = 'QTY';
 
-  const qtySortIcon = document.createElement('img');
+  const qtySortIcon: HTMLImageElement = document.createElement('img');
   qtySortIcon.src = sortIcon;
   qtySortIcon.alt = '';
 
@@ -61,19 +61,19 @@ export const renderCartModal = (modalContent: HTMLDivElement) => {
 
   cartHeader.append(nameSortButton, qtySortButton);
 
-  const cartDiv = document.createElement('div');
+  const cartDiv: HTMLDivElement = document.createElement('div');
   cartDiv.id = 'cart';
 
-  const cartAddButton = document.createElement('button');
+  const cartAddButton: HTMLButtonElement = document.createElement('button');
   cartAddButton.id = 'cart_add';
 
-  const pinkPlusIconImg = document.createElement('img');
+  const pinkPlusIconImg: HTMLImageElement = document.createElement('img');
   pinkPlusIconImg.src = pinkPlusIcon;
   pinkPlusIconImg.alt = '';
 
   cartAddButton.append(pinkPlusIconImg, 'Add Item');
 
-  const cartClearButton = document.createElement('button');
+  const cartClearButton: HTMLButtonElement = document.createElement('button');
   cartClearButton.id = 'cart_clear';
   cartClearButton.textContent = 'Clear All';
 
