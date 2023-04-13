@@ -1,7 +1,7 @@
 import './style.css'
-import mainLogo from '/logo_color.svg'
-import shopButton from '/button_shopping.svg'
-import { ShoppingCart } from './shopping_cart';
+import mainLogo from './assets/logo_color.svg'
+import shopButton from './assets/button_shopping.svg'
+import { ShoppingCart } from './shopping_cart/index';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <main id="assa_test">
@@ -11,18 +11,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </section>
     <article id="modal_content"></article>
   </main>
-`
-const modalElement = document.querySelector('#assa_test') as HTMLElement;
+`;
+
+const modalElement = document.querySelector<HTMLElement>('#assa_test')!;
+const modalContent = document.querySelector<HTMLPreElement>('#modal_content')!;
+const startModal = document.querySelector<HTMLDivElement>('#start_modal')!;
+
 export const shoppingCart = ShoppingCart(modalElement);
 
-const startShopping = (button: HTMLButtonElement) => {
-  const startModal = document.querySelector<HTMLDivElement>('#start_modal')!;
-  const modalContent = document.querySelector('#modal_content') as HTMLPreElement;
-
-  button.addEventListener("click", () => {
-    modalContent.style.display = "flex";
-    startModal.style.display = "none";
-    shoppingCart.init();
-  });
-}
-startShopping(document.querySelector<HTMLButtonElement>('#start_shopping')!);
+document.querySelector('#start_shopping')!.addEventListener("click", () => {
+  modalContent.style.display = "flex";
+  startModal.style.display = "none";
+  shoppingCart.init();
+});

@@ -1,6 +1,6 @@
 import { CartItem } from '../../types/types';
-import minusBlack from '../../public/minus_black.svg';
-import plusBlack from '../../public/plus_black.svg';
+import minusBlack from './../assets/minus_black.svg';
+import plusBlack from './../assets/plus_black.svg';
 
 export const Cart = {
   key: 'assa_cart',
@@ -56,12 +56,12 @@ export const Cart = {
       if (index === 0) {
         return true;
       }
-      return array[index - 1].name <= item.name;
+      return array[index - 1].name < item.name;
     });
     if (isAscending) {
-      Cart.items.sort((a, b) => b.name.localeCompare(a.name));
+      Cart.items.reverse();
     } else {
-      Cart.items.sort((a, b) => a.name.localeCompare(b.name));
+      Cart.items.sort((a, b) => (a.name < b.name ? -1 : (a.name > b.name ? 1 : 0)));
     }
     Cart.sync();
   },
@@ -80,21 +80,53 @@ export const Cart = {
     Cart.sync();
   },
   showCart() {
-    let cartSelection = document.querySelector('#cart') as HTMLDivElement;
-    cartSelection.innerHTML = '';
+    const cartSelection = document.querySelector('#cart') as HTMLDivElement;
+    cartSelection.textContent = '';
+
+    const fragment = document.createDocumentFragment();
+
     Cart.items.forEach(item => {
-      let cartItem = document.createElement('div');
-      cartItem.innerHTML = `
-        <div class="cart-item">
-          <h3 class="cart-item-name">${item.name}</h3>
-          <div class="cart-item-qty">
-            <button class="cart-item-qty-minus" data-id="${item.id}" data-qty="${item.qty}"><img src="${minusBlack}" alt="" /></button>
-            <p>${item.qty}</p>
-            <button class="cart-item-qty-plus" data-id="${item.id}" data-qty="${item.qty}"><img src="${plusBlack}" alt="" /></button>
-          </div>
-        </div>
-      `;
-      cartSelection.appendChild(cartItem);
+      const cartItem = document.createElement('div');
+      cartItem.classList.add('cart-item');
+
+      const itemName = document.createElement('h3');
+      itemName.classList.add('cart-item-name');
+      itemName.textContent = item.name;
+      cartItem.append(itemName);
+
+      const qtyContainer = document.createElement('div');
+      qtyContainer.classList.add('cart-item-qty');
+
+      const minusBtn = document.createElement('button');
+      minusBtn.classList.add('cart-item-qty-minus');
+      minusBtn.dataset.id = item.id.toString();
+      minusBtn.dataset.qty = item.qty.toString();
+
+      const minusImg = document.createElement('img');
+      minusImg.src = minusBlack;
+      minusImg.alt = 'decrease quantity';
+      minusBtn.append(minusImg);
+      qtyContainer.append(minusBtn);
+
+      const itemQty = document.createElement('p');
+      itemQty.textContent = item.qty.toString();
+      qtyContainer.append(itemQty);
+
+      const plusBtn = document.createElement('button');
+      plusBtn.classList.add('cart-item-qty-plus');
+      plusBtn.dataset.id = item.id.toString();
+      plusBtn.dataset.qty = item.qty.toString();
+
+      const plusImg = document.createElement('img');
+      plusImg.src = plusBlack;
+      plusImg.alt = 'increment quantity';
+      plusBtn.append(plusImg);
+      qtyContainer.append(plusBtn);
+
+      cartItem.append(qtyContainer);
+      fragment.append(cartItem);
     });
-  },
+
+    cartSelection.append(fragment);
+  }
 };
