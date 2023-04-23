@@ -31,7 +31,8 @@ To build the app for production, run `npm run build`. The app will be built in t
 
 - TypeScript
 - Vite
-- Local storage
+- CSS
+- HTML
 
 ## Contributing
 
